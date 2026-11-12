@@ -4,7 +4,7 @@
 |---|---|---|
 |  |  | A — Kịch bản rủi ro + Mức tự chủ (§2, §4) |
 |  |  | B — UX khi AI sai + Tốt là gì (§3, §6) |
-|  |  | C — Prototype + Demo (§5, §7) |
+| Vũ Quang Dung |  | C — Prototype + Demo (§5, §7); file `spec_1.md` + `prototype/index.html` |
 
 ## §1. Lát cắt & phạm vi
 
@@ -77,12 +77,17 @@
 
 ## §5. Prototype
 
-- Công cụ: HTML 1 file (`prototype/index.html`), không backend, dữ liệu dựng trong file. Mở bằng trình duyệt là bấm được.
-- Link/file: `prototype/` trong repo nộp (file + 2 ảnh đánh số `shot-1.png`, `shot-2.png`).
-- Phần mock: đếm ngược 20 phút chạy thật bằng JS; nút "Xác nhận" chỉ mô phỏng gọi tool (không gọi backend). Không có lời gọi AI thật (bài thiết kế, không bắt buộc).
-- Màn hình 1 — "Đề xuất + giữ chỗ" (ca #2): ① thẻ "BM 213 — ĐÃ HUỶ do bão" · ② bảng 2 chuyến sáng mai kèm số chỗ (BM 201: 9 chỗ, BM 205: 4 chỗ) · ③ đếm ngược 20:00 + dòng "chưa đổi vé, hết giờ tự nhả" · ④ ô xác nhận "doi 201 cho ca 2 nguoi" + nút sửa. → Mức tự chủ: `tra_cuu_dat_cho` + `giu_cho_chuyen_moi` tự làm. → HAX: G10 (hỏi lại thay vì đoán), G11 (số chỗ + nguồn), G9 (sửa trước khi chốt).
-- Màn hình 2 — "Cảnh báo hoàn" (ca #3): ⑤ hộp đỏ "GỬI RỒI KHÔNG HUỶ ĐƯỢC — tiền về thẻ cũ, tới 90 ngày" · ⑥ 2 nút "Giữ chỗ đổi trước" / "Tôi vẫn muốn hoàn" · ⑦ xác nhận mạnh 2 bước (nút + gõ 'HOAN, TOI CHAC CHAN'). → Mức tự chủ: hoàn ở mức cấm-tự-gửi, đổi cần khách duyệt, có đường chuyển nhân viên. → HAX: G1 (nói rõ làm được gì), G2 (nói rõ giới hạn AI), G8 (bỏ dở không mất gì).
-- Quyết định cách hiện: đã nghĩ tới cách "chatbot thuần chữ" (như mẫu) nhưng loại vì số chỗ + đếm ngược + cảnh báo đỏ cần nhìn thấy cùng lúc mới chặn được bấm bừa; chọn thẻ + nút bấm vì khách đang vội, đọc 1 màn hình là đủ quyết. Bằng chứng độ chắc hiện bằng số chỗ cụ thể + nguồn dữ liệu, không dùng % mơ hồ.
+- Công cụ: HTML 1 file. Mở `prototype/index.html` bằng trình duyệt, không backend, không API key, không lời gọi AI thật.
+- Ca demo (khác mẫu "sáng mai"): *"Đổi cho 2 mẹ con sang chuyến 9h tối nay luôn đi."* — BM 217 21:00 chỉ còn 1 chỗ.
+- Số ①–⑥ nằm sẵn trên màn hình (bấm được, không cần ảnh riêng):
+  1. **G10** — chặn BM 217, không đoán đổi 2 người vào 1 chỗ.
+  2. **G11** — bảng 3 chuyến + số chỗ + nguồn TRV-7Q2K.
+  3. **G9** — nút sửa giữ BM 201 ↔ BM 205 trước khi xác nhận.
+  4. **G1** — giữ chỗ 20 phút / soạn hoàn; không tự đổi, không tự gửi.
+  5. **G2** — nhãn "mình là AI, quyết định cuối là của bạn".
+  6. **G8** — "Giữ chỗ, đổi trước" / bỏ dở hoàn thì không mất gì.
+- Mức tự chủ trên màn hình đúng §4: `tra_cuu_dat_cho` + `giu_cho_chuyen_moi` tự làm (đếm ngược 20:00, chưa đổi vé) · `doi_chuyen_bay` cần nút "Xác nhận đổi" · `gui_yeu_cau_hoan_ve` cần gõ `HOAN, TOI CHAC CHAN` · `chuyen_nhan_vien` có nút, không có nút đổi tên / trẻ bay một mình.
+- Quyết định cách hiện: loại chatbot thuần chữ (mẫu) vì số chỗ + đếm ngược + cảnh báo đỏ phải nhìn cùng lúc mới chặn bấm bừa. Bằng chứng độ chắc = số chỗ cụ thể, không dùng %.
 
 ## §6. Tốt là gì
 
@@ -94,4 +99,6 @@
 
 ## §7. Demo
 
-(Điền sau demo: ca lạ nhận được là gì · prototype đã làm gì · nhóm có đổi ý gì không.)
+- Ca khó bấm: "Đổi cho 2 mẹ con sang chuyến 9h tối nay luôn đi." Prototype chặn BM 217 (1 chỗ), giữ BM 201 20 phút, chỉ đổi sau "Xác nhận đổi".
+- Ca hoàn: bấm "Thôi, hoàn vé" → hộp đỏ 3 dòng (không huỷ được / tiền về đâu / 90 ngày) → gõ `HOAN, TOI CHAC CHAN` mới gửi; bấm "Giữ chỗ, đổi trước" thì không mất gì.
+- Ca lạ dự kiến: "Mình muốn hoàn nhưng không chắc." → không gửi, giữ chỗ, hoặc chuyển nhân viên. Điền ca thật sau buổi demo.
